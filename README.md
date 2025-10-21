@@ -101,4 +101,4 @@ Prueba:
 - Dos capturas de `/pokenea/view` mostrando **dos container_id distintos**.
 - IP pública y link al repo de GitHub.
 
-¡Éxitos! 💪
+¡Éxitos! 💪# poke readme tweak
