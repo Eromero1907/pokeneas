@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ p.nombre }} - Pokeneas</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Arial, sans-serif; padding: 32px; }
+      .card { max-width: 560px; border: 1px solid #eee; border-radius: 16px; padding: 24px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+      img { max-width: 100%; border-radius: 12px; }
+      .muted { color: #666; font-size: 14px; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>{{ p.nombre }}</h1>
+      <p><strong>Altura:</strong> {{ p.altura }} &nbsp; | &nbsp; <strong>Habilidad:</strong> {{ p.habilidad }}</p>
+      <img src="{{ p.imagen }}" alt="{{ p.nombre }}">
+      <p><em>{{ p.frase }}</em></p>
+      <p class="muted">Container ID: {{ container_id }}</p>
+      <p class="muted"><a href="/pokenea/json">Ver JSON</a></p>
+    </div>
+  </body>
+</html>
