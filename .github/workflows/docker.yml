@@ -2,11 +2,24 @@ name: Build and Push Docker image
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docker-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  IMAGE_NAME: eromero1907/pokeneas
+  TAG: latest
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,9 +30,18 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # (Opcional) Si quieres multi-arquitectura, agrega setup-qemu y platforms abajo.
+      # - name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v3
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          push: true
           context: .
-          tags: USUARIO/pokeneas:latest
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ env.TAG }}
+          # Para AWS/EC2 (x86_64) normalmente basta amd64.
+          # platforms: linux/amd64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
